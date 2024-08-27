@@ -4,9 +4,323 @@
     xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
     layout:decorate="~{layouts/default}"
 >
-    <body>
-        <div layout:fragment="content">
-            상품 목록
+    <div layout:fragment="content">
+        <div class="max-w-[640px] mx-auto text-center">
+            <div class="flex items-center justify-between mt-[50px] mb-[12px]">
+                <div>총 300건</div>
+                
+                <ul class="flex items-center">
+                    <li><a href="#" class="block p-2">신상품순</a></li>
+                    <li><a href="#" class="block p-2">판매량순</a></li>
+                    <li><a href="#" class="block p-2">낮은 가격순</a></li>
+                    <li><a href="#" class="block p-2">높은 가격순</a></li>
+                </ul>
+            </div>
+            
+            <div class="grid gap-4 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
+	            <div class="max-w-xs rounded overflow-hidden shadow-lg bg-white border mx-auto">
+	               <div class="relative">
+                        <img class="w-full" src="/product_thumbnail.jpeg" alt="Product Image">
+                    </div>
+	            
+				    <!-- Add to Cart Button -->
+				    <div class="px-6 py-4">
+				        <button class="w-full bg-white border border-gray-300 text-gray-700 font-bold py-2 px-4 rounded shadow-sm hover:bg-gray-50 flex items-center justify-center">
+				            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 3h1.386c.51 0 .955.343 1.087.835l.383 1.437M7.5 14.25a3 3 0 0 0-3 3h15.75m-12.75-3h11.218c1.121-2.3 2.1-4.684 2.924-7.138a60.114 60.114 0 0 0-16.536-1.84M7.5 14.25 5.106 5.272M6 20.25a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0Zm12.75 0a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0Z" />
+                            </svg>
+				            
+				            <span class="ml-1">담기</span>
+				        </button>
+				    </div>            
+                    <!-- Product Information -->
+				    <div class="px-6 py-4">
+				        <h3 class="font-bold text-lg">[마더푸드] 오리지널 쪽갈비</h3>
+				        <p class="text-gray-500 text-sm mt-2">한 손으로 들고 뜯어 즐기는 쪽갈비</p>
+				    </div>
+				    
+				    <!-- Price Section -->
+				    <div class="px-6 py-4">
+				        <p class="text-gray-500 text-sm line-through">15,600원</p>
+				        <p class="text-gray-500 text-sm mt-1">9,999+</p>
+				    </div>
+                </div>
+	            <div class="max-w-xs rounded overflow-hidden shadow-lg bg-white border mx-auto">
+	               <div class="relative">
+                        <img class="w-full" src="/product_thumbnail.jpeg" alt="Product Image">
+                    </div>
+	            
+				    <!-- Add to Cart Button -->
+				    <div class="px-6 py-4">
+				        <button class="w-full bg-white border border-gray-300 text-gray-700 font-bold py-2 px-4 rounded shadow-sm hover:bg-gray-50 flex items-center justify-center">
+				            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 3h1.386c.51 0 .955.343 1.087.835l.383 1.437M7.5 14.25a3 3 0 0 0-3 3h15.75m-12.75-3h11.218c1.121-2.3 2.1-4.684 2.924-7.138a60.114 60.114 0 0 0-16.536-1.84M7.5 14.25 5.106 5.272M6 20.25a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0Zm12.75 0a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0Z" />
+                            </svg>
+				            
+				            <span class="ml-1">담기</span>
+				        </button>
+				    </div>            
+                    <!-- Product Information -->
+				    <div class="px-6 py-4">
+				        <h3 class="font-bold text-lg">[마더푸드] 오리지널 쪽갈비</h3>
+				        <p class="text-gray-500 text-sm mt-2">한 손으로 들고 뜯어 즐기는 쪽갈비</p>
+				    </div>
+				    
+				    <!-- Price Section -->
+				    <div class="px-6 py-4">
+				        <p class="text-gray-500 text-sm line-through">15,600원</p>
+				        <p class="text-gray-500 text-sm mt-1">9,999+</p>
+				    </div>
+                </div>
+	            <div class="max-w-xs rounded overflow-hidden shadow-lg bg-white border mx-auto">
+	               <div class="relative">
+                        <img class="w-full" src="/product_thumbnail.jpeg" alt="Product Image">
+                    </div>
+	            
+				    <!-- Add to Cart Button -->
+				    <div class="px-6 py-4">
+				        <button class="w-full bg-white border border-gray-300 text-gray-700 font-bold py-2 px-4 rounded shadow-sm hover:bg-gray-50 flex items-center justify-center">
+				            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 3h1.386c.51 0 .955.343 1.087.835l.383 1.437M7.5 14.25a3 3 0 0 0-3 3h15.75m-12.75-3h11.218c1.121-2.3 2.1-4.684 2.924-7.138a60.114 60.114 0 0 0-16.536-1.84M7.5 14.25 5.106 5.272M6 20.25a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0Zm12.75 0a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0Z" />
+                            </svg>
+				            
+				            <span class="ml-1">담기</span>
+				        </button>
+				    </div>            
+                    <!-- Product Information -->
+				    <div class="px-6 py-4">
+				        <h3 class="font-bold text-lg">[마더푸드] 오리지널 쪽갈비</h3>
+				        <p class="text-gray-500 text-sm mt-2">한 손으로 들고 뜯어 즐기는 쪽갈비</p>
+				    </div>
+				    
+				    <!-- Price Section -->
+				    <div class="px-6 py-4">
+				        <p class="text-gray-500 text-sm line-through">15,600원</p>
+				        <p class="text-gray-500 text-sm mt-1">9,999+</p>
+				    </div>
+                </div>
+	            <div class="max-w-xs rounded overflow-hidden shadow-lg bg-white border mx-auto">
+	               <div class="relative">
+                        <img class="w-full" src="/product_thumbnail.jpeg" alt="Product Image">
+                    </div>
+	            
+				    <!-- Add to Cart Button -->
+				    <div class="px-6 py-4">
+				        <button class="w-full bg-white border border-gray-300 text-gray-700 font-bold py-2 px-4 rounded shadow-sm hover:bg-gray-50 flex items-center justify-center">
+				            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 3h1.386c.51 0 .955.343 1.087.835l.383 1.437M7.5 14.25a3 3 0 0 0-3 3h15.75m-12.75-3h11.218c1.121-2.3 2.1-4.684 2.924-7.138a60.114 60.114 0 0 0-16.536-1.84M7.5 14.25 5.106 5.272M6 20.25a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0Zm12.75 0a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0Z" />
+                            </svg>
+				            
+				            <span class="ml-1">담기</span>
+				        </button>
+				    </div>            
+                    <!-- Product Information -->
+				    <div class="px-6 py-4">
+				        <h3 class="font-bold text-lg">[마더푸드] 오리지널 쪽갈비</h3>
+				        <p class="text-gray-500 text-sm mt-2">한 손으로 들고 뜯어 즐기는 쪽갈비</p>
+				    </div>
+				    
+				    <!-- Price Section -->
+				    <div class="px-6 py-4">
+				        <p class="text-gray-500 text-sm line-through">15,600원</p>
+				        <p class="text-gray-500 text-sm mt-1">9,999+</p>
+				    </div>
+                </div>
+	            <div class="max-w-xs rounded overflow-hidden shadow-lg bg-white border mx-auto">
+	               <div class="relative">
+                        <img class="w-full" src="/product_thumbnail.jpeg" alt="Product Image">
+                    </div>
+	            
+				    <!-- Add to Cart Button -->
+				    <div class="px-6 py-4">
+				        <button class="w-full bg-white border border-gray-300 text-gray-700 font-bold py-2 px-4 rounded shadow-sm hover:bg-gray-50 flex items-center justify-center">
+				            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 3h1.386c.51 0 .955.343 1.087.835l.383 1.437M7.5 14.25a3 3 0 0 0-3 3h15.75m-12.75-3h11.218c1.121-2.3 2.1-4.684 2.924-7.138a60.114 60.114 0 0 0-16.536-1.84M7.5 14.25 5.106 5.272M6 20.25a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0Zm12.75 0a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0Z" />
+                            </svg>
+				            
+				            <span class="ml-1">담기</span>
+				        </button>
+				    </div>            
+                    <!-- Product Information -->
+				    <div class="px-6 py-4">
+				        <h3 class="font-bold text-lg">[마더푸드] 오리지널 쪽갈비</h3>
+				        <p class="text-gray-500 text-sm mt-2">한 손으로 들고 뜯어 즐기는 쪽갈비</p>
+				    </div>
+				    
+				    <!-- Price Section -->
+				    <div class="px-6 py-4">
+				        <p class="text-gray-500 text-sm line-through">15,600원</p>
+				        <p class="text-gray-500 text-sm mt-1">9,999+</p>
+				    </div>
+                </div>
+	            <div class="max-w-xs rounded overflow-hidden shadow-lg bg-white border mx-auto">
+	               <div class="relative">
+                        <img class="w-full" src="/product_thumbnail.jpeg" alt="Product Image">
+                    </div>
+	            
+				    <!-- Add to Cart Button -->
+				    <div class="px-6 py-4">
+				        <button class="w-full bg-white border border-gray-300 text-gray-700 font-bold py-2 px-4 rounded shadow-sm hover:bg-gray-50 flex items-center justify-center">
+				            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 3h1.386c.51 0 .955.343 1.087.835l.383 1.437M7.5 14.25a3 3 0 0 0-3 3h15.75m-12.75-3h11.218c1.121-2.3 2.1-4.684 2.924-7.138a60.114 60.114 0 0 0-16.536-1.84M7.5 14.25 5.106 5.272M6 20.25a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0Zm12.75 0a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0Z" />
+                            </svg>
+				            
+				            <span class="ml-1">담기</span>
+				        </button>
+				    </div>            
+                    <!-- Product Information -->
+				    <div class="px-6 py-4">
+				        <h3 class="font-bold text-lg">[마더푸드] 오리지널 쪽갈비</h3>
+				        <p class="text-gray-500 text-sm mt-2">한 손으로 들고 뜯어 즐기는 쪽갈비</p>
+				    </div>
+				    
+				    <!-- Price Section -->
+				    <div class="px-6 py-4">
+				        <p class="text-gray-500 text-sm line-through">15,600원</p>
+				        <p class="text-gray-500 text-sm mt-1">9,999+</p>
+				    </div>
+                </div>
+	            <div class="max-w-xs rounded overflow-hidden shadow-lg bg-white border mx-auto">
+	               <div class="relative">
+                        <img class="w-full" src="/product_thumbnail.jpeg" alt="Product Image">
+                    </div>
+	            
+				    <!-- Add to Cart Button -->
+				    <div class="px-6 py-4">
+				        <button class="w-full bg-white border border-gray-300 text-gray-700 font-bold py-2 px-4 rounded shadow-sm hover:bg-gray-50 flex items-center justify-center">
+				            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 3h1.386c.51 0 .955.343 1.087.835l.383 1.437M7.5 14.25a3 3 0 0 0-3 3h15.75m-12.75-3h11.218c1.121-2.3 2.1-4.684 2.924-7.138a60.114 60.114 0 0 0-16.536-1.84M7.5 14.25 5.106 5.272M6 20.25a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0Zm12.75 0a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0Z" />
+                            </svg>
+				            
+				            <span class="ml-1">담기</span>
+				        </button>
+				    </div>            
+                    <!-- Product Information -->
+				    <div class="px-6 py-4">
+				        <h3 class="font-bold text-lg">[마더푸드] 오리지널 쪽갈비</h3>
+				        <p class="text-gray-500 text-sm mt-2">한 손으로 들고 뜯어 즐기는 쪽갈비</p>
+				    </div>
+				    
+				    <!-- Price Section -->
+				    <div class="px-6 py-4">
+				        <p class="text-gray-500 text-sm line-through">15,600원</p>
+				        <p class="text-gray-500 text-sm mt-1">9,999+</p>
+				    </div>
+                </div>
+	            <div class="max-w-xs rounded overflow-hidden shadow-lg bg-white border mx-auto">
+	               <div class="relative">
+                        <img class="w-full" src="/product_thumbnail.jpeg" alt="Product Image">
+                    </div>
+	            
+				    <!-- Add to Cart Button -->
+				    <div class="px-6 py-4">
+				        <button class="w-full bg-white border border-gray-300 text-gray-700 font-bold py-2 px-4 rounded shadow-sm hover:bg-gray-50 flex items-center justify-center">
+				            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 3h1.386c.51 0 .955.343 1.087.835l.383 1.437M7.5 14.25a3 3 0 0 0-3 3h15.75m-12.75-3h11.218c1.121-2.3 2.1-4.684 2.924-7.138a60.114 60.114 0 0 0-16.536-1.84M7.5 14.25 5.106 5.272M6 20.25a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0Zm12.75 0a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0Z" />
+                            </svg>
+				            
+				            <span class="ml-1">담기</span>
+				        </button>
+				    </div>            
+                    <!-- Product Information -->
+				    <div class="px-6 py-4">
+				        <h3 class="font-bold text-lg">[마더푸드] 오리지널 쪽갈비</h3>
+				        <p class="text-gray-500 text-sm mt-2">한 손으로 들고 뜯어 즐기는 쪽갈비</p>
+				    </div>
+				    
+				    <!-- Price Section -->
+				    <div class="px-6 py-4">
+				        <p class="text-gray-500 text-sm line-through">15,600원</p>
+				        <p class="text-gray-500 text-sm mt-1">9,999+</p>
+				    </div>
+                </div>
+	            <div class="max-w-xs rounded overflow-hidden shadow-lg bg-white border mx-auto">
+	               <div class="relative">
+                        <img class="w-full" src="/product_thumbnail.jpeg" alt="Product Image">
+                    </div>
+	            
+				    <!-- Add to Cart Button -->
+				    <div class="px-6 py-4">
+				        <button class="w-full bg-white border border-gray-300 text-gray-700 font-bold py-2 px-4 rounded shadow-sm hover:bg-gray-50 flex items-center justify-center">
+				            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 3h1.386c.51 0 .955.343 1.087.835l.383 1.437M7.5 14.25a3 3 0 0 0-3 3h15.75m-12.75-3h11.218c1.121-2.3 2.1-4.684 2.924-7.138a60.114 60.114 0 0 0-16.536-1.84M7.5 14.25 5.106 5.272M6 20.25a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0Zm12.75 0a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0Z" />
+                            </svg>
+				            
+				            <span class="ml-1">담기</span>
+				        </button>
+				    </div>            
+                    <!-- Product Information -->
+				    <div class="px-6 py-4">
+				        <h3 class="font-bold text-lg">[마더푸드] 오리지널 쪽갈비</h3>
+				        <p class="text-gray-500 text-sm mt-2">한 손으로 들고 뜯어 즐기는 쪽갈비</p>
+				    </div>
+				    
+				    <!-- Price Section -->
+				    <div class="px-6 py-4">
+				        <p class="text-gray-500 text-sm line-through">15,600원</p>
+				        <p class="text-gray-500 text-sm mt-1">9,999+</p>
+				    </div>
+                </div>
+	            <div class="max-w-xs rounded overflow-hidden shadow-lg bg-white border mx-auto">
+	               <div class="relative">
+                        <img class="w-full" src="/product_thumbnail.jpeg" alt="Product Image">
+                    </div>
+	            
+				    <!-- Add to Cart Button -->
+				    <div class="px-6 py-4">
+				        <button class="w-full bg-white border border-gray-300 text-gray-700 font-bold py-2 px-4 rounded shadow-sm hover:bg-gray-50 flex items-center justify-center">
+				            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 3h1.386c.51 0 .955.343 1.087.835l.383 1.437M7.5 14.25a3 3 0 0 0-3 3h15.75m-12.75-3h11.218c1.121-2.3 2.1-4.684 2.924-7.138a60.114 60.114 0 0 0-16.536-1.84M7.5 14.25 5.106 5.272M6 20.25a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0Zm12.75 0a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0Z" />
+                            </svg>
+				            
+				            <span class="ml-1">담기</span>
+				        </button>
+				    </div>            
+                    <!-- Product Information -->
+				    <div class="px-6 py-4">
+				        <h3 class="font-bold text-lg">[마더푸드] 오리지널 쪽갈비</h3>
+				        <p class="text-gray-500 text-sm mt-2">한 손으로 들고 뜯어 즐기는 쪽갈비</p>
+				    </div>
+				    
+				    <!-- Price Section -->
+				    <div class="px-6 py-4">
+				        <p class="text-gray-500 text-sm line-through">15,600원</p>
+				        <p class="text-gray-500 text-sm mt-1">9,999+</p>
+				    </div>
+                </div>
+	            <div class="max-w-xs rounded overflow-hidden shadow-lg bg-white border mx-auto">
+	               <div class="relative">
+                        <img class="w-full" src="/product_thumbnail.jpeg" alt="Product Image">
+                    </div>
+	            
+				    <!-- Add to Cart Button -->
+				    <div class="px-6 py-4">
+				        <button class="w-full bg-white border border-gray-300 text-gray-700 font-bold py-2 px-4 rounded shadow-sm hover:bg-gray-50 flex items-center justify-center">
+				            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 3h1.386c.51 0 .955.343 1.087.835l.383 1.437M7.5 14.25a3 3 0 0 0-3 3h15.75m-12.75-3h11.218c1.121-2.3 2.1-4.684 2.924-7.138a60.114 60.114 0 0 0-16.536-1.84M7.5 14.25 5.106 5.272M6 20.25a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0Zm12.75 0a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0Z" />
+                            </svg>
+				            
+				            <span class="ml-1">담기</span>
+				        </button>
+				    </div>            
+                    <!-- Product Information -->
+				    <div class="px-6 py-4">
+				        <h3 class="font-bold text-lg">[마더푸드] 오리지널 쪽갈비</h3>
+				        <p class="text-gray-500 text-sm mt-2">한 손으로 들고 뜯어 즐기는 쪽갈비</p>
+				    </div>
+				    
+				    <!-- Price Section -->
+				    <div class="px-6 py-4">
+				        <p class="text-gray-500 text-sm line-through">15,600원</p>
+				        <p class="text-gray-500 text-sm mt-1">9,999+</p>
+				    </div>
+                </div>
+	           
+	           
+        
+	            
+        
+            </div>
         </div>
-    </body>
+    </div>
 </html>
