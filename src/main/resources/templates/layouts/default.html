@@ -10,5 +10,22 @@
 <body>
     <div th:replace="~{fragments/header::h}"></div>
     <div layout:fragment="content"></div>
+    
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            // 드롭다운 메뉴 토글 스크립트 (기본적으로 Tailwind CSS에는 드롭다운 지원이 없어 JS 필요)
+            document.addEventListener('click', function (event) {
+                const dropdownToggle = document.querySelector('button[type="button"]');
+                const dropdownMenu = document.querySelector('.origin-top-right');
+                if (dropdownToggle && dropdownMenu) {
+                    if (dropdownToggle.contains(event.target)) {
+                        dropdownMenu.classList.toggle('hidden');
+                    } else {
+                        dropdownMenu.classList.add('hidden');
+                    }
+                }
+            });        	
+        });
+    </script>
 </body>
 </html>

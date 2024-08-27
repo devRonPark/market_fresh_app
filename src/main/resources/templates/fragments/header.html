@@ -7,20 +7,35 @@
 		<!-- 로그인 후 -->
 		<!-- 사용자 이름과 함께 드롭다운 메뉴 -->
 		<!-- 드롭다운 메뉴 클릭 시 내 정보, 내 주문내역 메뉴 -->
-		<ul class="absolute top-0 right-0 z-50 flex items-center space-x-4">
+		<ul sec:authorize="!isAuthenticated()" class="absolute top-0 right-0 z-50 flex items-center space-x-4">
 			<li><a href="/auth/join"
 				class="block py-2 text-gray-700 hover:text-purple-600">회원가입</a></a></li>
 			<li><a href="/auth/login"
 				class="block py-2 text-gray-700 hover:text-purple-600">로그인</a></a></li>
 				
-		      <!-- 로그인한 경우 -->
-                <div sec:authorize="isAuthenticated()">
-                    <p class="text-gray-700">현재 로그인한 상태</p>
-                    <a href="/auth/logout" class="bg-red-600 text-white py-1 px-3 rounded-md hover:bg-red-500 focus:outline-none focus:ring-2 focus:ring-red-500 transition duration-300">
-                        로그아웃
-                    </a>
-                </div>
 		</ul>
+	      <!-- 로그인한 경우 -->
+        <div sec:authorize="isAuthenticated()" class="absolute top-0 right-0">
+            <!-- 사용자 이름과 드롭다운 메뉴 -->
+            <div class="relative inline-block text-left">
+                <div class="flex items-center py-3">
+                    <span>[[${#authentication.principal.name}]] 님</span>
+                    <button type="button" class="inline-flex justify-center focus:outline-none">
+                        <svg class="-mr-1 ml-2 h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                            <path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 10.94l3.71-3.71a.75.75 0 111.06 1.06l-4.25 4.25a.75.75 0 01-1.06 0L5.23 8.27a.75.75 0 01.02-1.06z" clip-rule="evenodd" />
+                        </svg>
+                    </button>
+                </div>
+                <!-- 드롭다운 메뉴 -->
+                <div class="origin-top-right absolute right-0 mt-2 w-56 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 hidden">
+                    <div class="py-1" role="menu" aria-orientation="vertical" aria-labelledby="options-menu">
+                        <a href="/auth/logout" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" role="menuitem">로그아웃</a>
+                        <a href="/profile" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" role="menuitem">내 프로필</a>
+                        <a href="/orders" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" role="menuitem">내 주문내역</a>
+                    </div>
+                </div>
+            </div>
+        </div>
 
 		<div class="flex items-center justify-between">
 			<!--  로고 -->
