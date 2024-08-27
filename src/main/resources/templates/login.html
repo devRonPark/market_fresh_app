@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html 
+    xmlns:th="http://www.thymeleaf.org"
+    xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+    layout:decorate="~{layouts/default}"
+>
+    <body>
+        <div layout:fragment="content">
+            <div class="max-w-[640px] mx-auto text-center">
+                <form action="/auth/login" method="post" class="flex flex-col justify-start">
+                    <h1 class="my-12 text-[28px] color-[#333333]">로그인</h1>
+                    
+                    <div class="space-y-4 pr-[50px]">
+                        <div class="px-5 py-2.5 flex">
+                            <label for="email" class="pt-[12px] min-w-[150px] text-gray-700 text-sm whitespace-nowrap">이메일 <span class="text-[#EE6A7B]">*</span></label>
+                            <input class="px-3 py-2 border border-w-1 border-color-[#DDDDDD] focus:border-color-[#333333] w-full placeholder:text-xs md:placeholder:text-sm lg:placeholder:text-base" type="email" id="email" name="email" placeholder="이메일을 입력해주세요" />
+                        </div>
+                        <div class="px-5 py-2.5 flex">
+                            <label for="password" class="pt-[12px] min-w-[150px] text-gray-700 text-sm whitespace-nowrap">비밀번호 <span class="text-[#EE6A7B]">*</span></label>
+                            <input class="px-3 py-2 border border-w-1 border-color-[#DDDDDD] focus:border-color-[#333333] w-full placeholder:text-xs md:placeholder:text-sm lg:placeholder:text-base" type="password" id="password" name="password" placeholder="비밀번호를 입력해주세요" />
+                        </div>
+                    </div>
+                    
+                    <div class="py-[40px] space-y-[10px]">
+                        <button type="submit" class="block w-60 h-14 mx-auto bg-[#5F0080] rounded-md text-white text-center">로그인</button>
+                        <a href="/join" class="block w-60 h-14 mx-auto border border-[#5F0080] rounded-md text-[#5F0080] text-center flex items-center justify-center">회원가입</a>                    
+                    </div>
+                </form>
+            </div>
+        </div>
+    </body>
+</html>

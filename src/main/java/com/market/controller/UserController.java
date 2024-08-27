@@ -16,4 +16,9 @@ public class UserController {
 	public String joinPage() {
 		return "join";
 	}
+	
+	@GetMapping("/login")
+	public String loginPage() {
+		return "login";
+	}
 }
