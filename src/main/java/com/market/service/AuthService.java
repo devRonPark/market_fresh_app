@@ -1,7 +1,9 @@
 package com.market.service;
 
-import com.market.domain.JoinForm;
+import com.market.domain.JoinFormDTO;
+import com.market.domain.LoginFormDTO;
 
 public interface AuthService {
-	void join(JoinForm joinForm) throws Exception;
+	void join(JoinFormDTO joinForm) throws Exception;
+	void login(LoginFormDTO loginForm) throws Exception;
 }

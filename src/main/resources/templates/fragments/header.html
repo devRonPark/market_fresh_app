@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<div th:fragment="header" class="border-b bg-white">
+<div th:fragment="h" class="border-b bg-white">
 	<header class="max-w-[1050px] mx-auto pt-11 pb-4 relative">
 		<!-- 로그인 전 -->
 		<!-- 회원가입/로그인 -->
@@ -8,10 +8,18 @@
 		<!-- 사용자 이름과 함께 드롭다운 메뉴 -->
 		<!-- 드롭다운 메뉴 클릭 시 내 정보, 내 주문내역 메뉴 -->
 		<ul class="absolute top-0 right-0 z-50 flex items-center space-x-4">
-			<li><a href="/join"
+			<li><a href="/auth/join"
 				class="block py-2 text-gray-700 hover:text-purple-600">회원가입</a></a></li>
-			<li><a href="/login"
+			<li><a href="/auth/login"
 				class="block py-2 text-gray-700 hover:text-purple-600">로그인</a></a></li>
+				
+		      <!-- 로그인한 경우 -->
+                <div sec:authorize="isAuthenticated()">
+                    <p class="text-gray-700">현재 로그인한 상태</p>
+                    <a href="/auth/logout" class="bg-red-600 text-white py-1 px-3 rounded-md hover:bg-red-500 focus:outline-none focus:ring-2 focus:ring-red-500 transition duration-300">
+                        로그아웃
+                    </a>
+                </div>
 		</ul>
 
 		<div class="flex items-center justify-between">

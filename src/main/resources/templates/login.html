@@ -7,17 +7,17 @@
     <body>
         <div layout:fragment="content">
             <div class="max-w-[640px] mx-auto text-center">
-                <form action="/auth/login" method="post" class="flex flex-col justify-start">
+                <form action="#" th:action="@{/auth/login}" method="post" class="flex flex-col justify-start" th:object="${loginForm}">
                     <h1 class="my-12 text-[28px] color-[#333333]">로그인</h1>
                     
                     <div class="space-y-4 pr-[50px]">
                         <div class="px-5 py-2.5 flex">
-                            <label for="email" class="pt-[12px] min-w-[150px] text-gray-700 text-sm whitespace-nowrap">이메일 <span class="text-[#EE6A7B]">*</span></label>
-                            <input class="px-3 py-2 border border-w-1 border-color-[#DDDDDD] focus:border-color-[#333333] w-full placeholder:text-xs md:placeholder:text-sm lg:placeholder:text-base" type="email" id="email" name="email" placeholder="이메일을 입력해주세요" />
+                            <label for="username" class="pt-[12px] min-w-[150px] text-gray-700 text-sm whitespace-nowrap">이메일 <span class="text-[#EE6A7B]">*</span></label>
+                            <input class="px-3 py-2 border border-w-1 border-color-[#DDDDDD] focus:border-color-[#333333] w-full placeholder:text-xs md:placeholder:text-sm lg:placeholder:text-base" type="email" id="username" th:field="*{username}" placeholder="이메일을 입력해주세요" required />
                         </div>
                         <div class="px-5 py-2.5 flex">
                             <label for="password" class="pt-[12px] min-w-[150px] text-gray-700 text-sm whitespace-nowrap">비밀번호 <span class="text-[#EE6A7B]">*</span></label>
-                            <input class="px-3 py-2 border border-w-1 border-color-[#DDDDDD] focus:border-color-[#333333] w-full placeholder:text-xs md:placeholder:text-sm lg:placeholder:text-base" type="password" id="password" name="password" placeholder="비밀번호를 입력해주세요" />
+                            <input class="px-3 py-2 border border-w-1 border-color-[#DDDDDD] focus:border-color-[#333333] w-full placeholder:text-xs md:placeholder:text-sm lg:placeholder:text-base" type="password" id="password" th:field="*{password}" placeholder="비밀번호를 입력해주세요" required />
                         </div>
                     </div>
                     

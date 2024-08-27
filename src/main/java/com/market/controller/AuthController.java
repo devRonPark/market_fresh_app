@@ -1,5 +1,7 @@
 package com.market.controller;
 
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
@@ -9,29 +11,32 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.market.domain.JoinForm;
+import com.market.domain.JoinFormDTO;
+import com.market.domain.LoginFormDTO;
 import com.market.service.AuthService;
 
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
 
 @Controller
-@RequestMapping("/")
 @RequiredArgsConstructor
+@RequestMapping("/auth")
 public class AuthController {
 	private final AuthService authService;
 
 	@GetMapping("/join")
 	public ModelAndView joinPage() {
-		return new ModelAndView("join", "joinForm", new JoinForm());
+		return new ModelAndView("join", "joinForm", new JoinFormDTO());
 	}
 
 	@GetMapping("/login")
-	public String loginPage() {
-		return "login";
+	public ModelAndView loginPage() {
+		return new ModelAndView("login", "loginForm", new LoginFormDTO());
 	}
 
-	@PostMapping("/auth/join")
-	public ModelAndView join(@Validated JoinForm joinForm, BindingResult result) throws Exception {
+	@PostMapping("/join")
+	public ModelAndView join(@ModelAttribute("joinForm") @Validated JoinFormDTO joinForm, BindingResult result) throws Exception {
 		if (result.hasErrors()) {
 			return new ModelAndView("join", "result", result);
 		}
@@ -41,6 +46,23 @@ public class AuthController {
 			return new ModelAndView("join", "result", result);
 		}
 		authService.join(joinForm);
-		return new ModelAndView("redirect:/login");
+		return new ModelAndView("redirect:/auth/login");
+	}
+	
+	@PostMapping("/login")
+	public String login(@ModelAttribute("loginForm") @Validated LoginFormDTO loginForm, BindingResult result) throws Exception {
+		if (result.hasErrors()) {
+			return "login";
+		}
+		authService.login(loginForm);
+		return "redirect:/";
+	}
+	
+	@GetMapping("/logout")
+	public String logout(HttpServletRequest req, HttpServletResponse res) {
+		System.out.println("로그아웃 요청");
+		new SecurityContextLogoutHandler()
+		    .logout(req, res, SecurityContextHolder.getContext().getAuthentication());
+		return "redirect:/";
 	}
 }
