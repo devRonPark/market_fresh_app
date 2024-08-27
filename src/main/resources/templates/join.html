@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html 
+    xmlns:th="http://www.thymeleaf.org"
+    xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+    layout:decorate="~{layouts/default}"
+>
+    <body>
+        <div layout:fragment="content">
+            <div class="max-w-[640px] mx-auto text-center">
+	            <form action="/auth/join" method="post" class="flex flex-col justify-start">
+	                <h1 class="my-12 text-[28px] color-[#333333]">회원가입</h1>
+	                
+	                <div class="pb-2.5 border-b-2 border-[#333333]">
+	                    <span class="text-[#EE6A7B]">*</span>
+	                    필수입력사항
+	                </div>
+	                
+	                <div class="space-y-4 pr-[50px]">
+	                    <div class="px-5 py-2.5 flex">
+	                        <label for="email" class="pt-[12px] min-w-[150px] text-gray-700 text-sm whitespace-nowrap">이메일<span class="text-[#EE6A7B]">*</span></label>
+	                        <input class="px-3 py-2 border border-w-1 border-color-[#DDDDDD] focus:border-color-[#333333] w-full placeholder:text-xs md:placeholder:text-sm lg:placeholder:text-base" type="email" id="email" name="email" placeholder="이메일을 입력해주세요" />
+	                    </div>
+	                    <div class="px-5 py-2.5 flex">
+	                        <label for="password" class="pt-[12px] min-w-[150px] text-gray-700 text-sm whitespace-nowrap">비밀번호<span class="text-[#EE6A7B]">*</span></label>
+	                        <input class="px-3 py-2 border border-w-1 border-color-[#DDDDDD] focus:border-color-[#333333] w-full placeholder:text-xs md:placeholder:text-sm lg:placeholder:text-base" type="password" id="password" name="password" placeholder="비밀번호를 입력해주세요" />
+	                    </div>
+	                    <div class="px-5 py-2.5 flex">
+	                        <label for="passwordConfirm" class="pt-[12px] min-w-[150px] text-gray-700 text-sm whitespace-nowrap">비밀번호확인<span class="text-[#EE6A7B]">*</span></label>
+	                        <input class="px-3 py-2 border border-w-1 border-color-[#DDDDDD] focus:border-color-[#333333] w-full placeholder:text-xs md:placeholder:text-sm lg:placeholder:text-base" type="password" id="passwordConfirm" name="passwordConfirm" placeholder="비밀번호를 한번 더 입력해주세요" />
+	                    </div>
+	                </div>
+	                
+	                <!-- 개인정보 약관동의 -->
+	                <div class="py-[40px]">
+		                <button type="submit" class="w-60 h-14 mx-auto bg-[#5F0080] rounded-md text-white text-center">가입하기</button>	                
+	                </div>
+	            </form>
+            
+            </div>
+        </div>
+    </body>
+</html>

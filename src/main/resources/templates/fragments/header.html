@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<div th:fragment="header" class="border-b bg-white">
+	<header class="max-w-[1050px] mx-auto pt-11 pb-4 relative">
+		<!-- 로그인 전 -->
+		<!-- 회원가입/로그인 -->
+		<!-- 로그인 후 -->
+		<!-- 사용자 이름과 함께 드롭다운 메뉴 -->
+		<!-- 드롭다운 메뉴 클릭 시 내 정보, 내 주문내역 메뉴 -->
+		<ul class="absolute top-0 right-0 z-50 flex items-center space-x-4">
+			<li><a href="/join"
+				class="block py-2 text-gray-700 hover:text-purple-600">회원가입</a></a></li>
+			<li><a href="/login"
+				class="block py-2 text-gray-700 hover:text-purple-600">로그인</a></a></li>
+		</ul>
+
+		<div class="flex items-center justify-between">
+			<!--  로고 -->
+			<a href="/"><img src="/logo.svg" alt="로고" /></a>
+
+			<!--  검색 -->
+			<form action="/product/search" method="post"
+				class="flex-grow max-w-lg mx-4 flex items-center relative"
+		    >
+				<input type="search" placeholder="검색어를 입력해주세요"
+					class="w-full py-2 px-4 border border-[1px] border-[#5f0080] rounded-md focus:outline-none focus:border-purple-500" />
+				<button type="submit" class="absolute right-1 top-1/2 transform -translate-y-1/2 w-7 h-7">
+					<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="#5f0080" class="size-6">
+	                    <path stroke-linecap="round" stroke-linejoin="round" d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z" />
+	                </svg>				
+				</button>
+				
+			</form>
+
+			<!-- 장바구니 -->
+			<div>
+			     <a href="#">
+					<svg xmlns="http://www.w3.org/2000/svg" class="cursor-pointer h-6 w-6 text-gray-500 hover:text-purple-500" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+	                    <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 3h1.386c.51 0 .955.343 1.087.835l.383 1.437M7.5 14.25a3 3 0 0 0-3 3h15.75m-12.75-3h11.218c1.121-2.3 2.1-4.684 2.924-7.138a60.114 60.114 0 0 0-16.536-1.84M7.5 14.25 5.106 5.272M6 20.25a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0Zm12.75 0a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0Z" />
+	                </svg>			     
+			     </a>
+			</div>
+		</div>
+	</header>
+</div>
+</html>
