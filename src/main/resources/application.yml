@@ -1,0 +1,16 @@
+spring:
+  application:
+    name: market_fresh
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/market_fresh_db
+    username: root
+    password: 1234
+  jpa:
+    database: mysql
+    generate-ddl: true
+    show-sql: true
+    open-in-view: false
+  sql:
+    init:
+      mode: never
