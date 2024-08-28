@@ -97,8 +97,17 @@
                 	 selectedItemCountBox.textContent = parseInt(selectedItemCountBox.textContent) - 1;
                  }
              });
+         });
          
-         })  
+         // 장바구니에 담긴 상품 정보 중 체크박스 활성화된 요소만 선택삭제 처리
+         const form = document.getElementById('removeSelectedItemsForm');
+         form.addEventListener('submit', (event) => {
+             const selectedProductIds = Array.from(itemCheckboxes)
+                 .filter(checkbox => checkbox.checked)
+                 .map(checkbox => checkbox.value);
+
+             document.getElementById('selectedProductIds').value = selectedProductIds.join(',');
+         });
         });
     </script>
 </body>

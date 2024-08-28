@@ -14,6 +14,7 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.PostLoad;
 import jakarta.persistence.PrePersist;
+import jakarta.persistence.PreUpdate;
 import jakarta.persistence.Transient;
 import lombok.Builder;
 import lombok.Data;
@@ -44,6 +45,10 @@ public class CartItem {
     
     @Column(name = "added_at", nullable = false)
     private LocalDateTime addedAt;
+    
+//    softDelete 처리를 위해 생성
+    @Column(name = "deleted_at", nullable = true)
+    private LocalDateTime deletedAt;
     
     // 가상 컬럼
  	@Transient

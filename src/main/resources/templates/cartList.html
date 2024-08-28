@@ -36,9 +36,17 @@
 						</p>
 					</div>
 					<div>
-						<button class="px-3 py-1 border border-black border-solid border-1 rounded-md text-sm text-black-500 hover:bg-[#f2f5f8]">
-						   선택 삭제
-						</button>
+						<form id="removeSelectedItemsForm" th:action="@{/cart/remove-selected}" method="post">
+						    <input type="hidden" name="cartId" th:value="${cartItemList[0].shoppingCart.id}" />
+						    <input type="hidden" name="productIds" id="selectedProductIds" />
+                            <button 
+                                type="submit" 
+                                class="px-3 py-1 border border-black border-solid border-1 rounded-md text-sm text-black-500 hover:bg-[#f2f5f8]"
+                                th:disabled="${isCartEmpty}"
+                            >
+                                선택 삭제
+                            </button>
+                        </form>
 					</div>
 				</div>
 				<div th:if="${isCartEmpty}" class="mt-[120px]">
@@ -53,7 +61,7 @@
                     <!-- 상품 정보 -->
                     <div class="flex justify-between items-center">
                         <div class="flex gap-x-2">
-	                        <input type="checkbox" class="item-checkbox" checked />
+	                        <input type="checkbox" class="item-checkbox" checked name="productId" th:value="${cartItem.product.id}" />
 	                        <p>[ [[${cartItem.product.brand}]] ] [[${cartItem.product.name}]]</p>                        
                         </div>
                         <form th:action="@{/cart/remove}" th:method="delete">

@@ -1,5 +1,7 @@
 package com.market.service;
 
+import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
@@ -8,12 +10,15 @@ import java.util.stream.Collectors;
 import org.springframework.stereotype.Service;
 
 import com.market.domain.RemoveCartItemRequestDTO;
+import com.market.domain.RemoveSelectedCartItemsRequestDTO;
 import com.market.domain.ShoppingCartStatus;
 import com.market.entity.CartItem;
+import com.market.entity.Product;
 import com.market.entity.ShoppingCart;
 import com.market.entity.User;
 import com.market.repository.CartItemRepository;
 import com.market.repository.CartRepository;
+import com.market.repository.ProductRepository;
 import com.market.repository.UserRepository;
 
 import jakarta.transaction.Transactional;
@@ -24,6 +29,7 @@ import lombok.RequiredArgsConstructor;
 public class CartServiceImpl implements CartService {
 	private final CartRepository cartRepository;
 	private final CartItemRepository cartItemRepository;
+	private final ProductRepository productRepository;
 	private final UserRepository userRepository;
 	
 	@Override
@@ -83,8 +89,9 @@ public class CartServiceImpl implements CartService {
 		}
 		
 		if (optCart.isPresent()) {
-			ShoppingCart cart = optCart.get();			
-			List<CartItem> cartItemList = cartItemRepository.findAllByShoppingCart(cart);		
+			ShoppingCart cart = optCart.get();
+			Long shoppingCartId = cart.getId();
+			List<CartItem> cartItemList = cartItemRepository.findActiveCartItemsByShoppingCartId(shoppingCartId);		
 			return cartItemList;			
 		}
 		else {
@@ -120,10 +127,6 @@ public class CartServiceImpl implements CartService {
 		// 데이터베이스에서 해당 상품을 찾아 삭제
 		// 조건에 따른 삭제 로직
 		ShoppingCart existingCart = existingOptCart.get();
-		System.out.println("-----------------------------");
-		System.out.println(existingCart);
-		System.out.println("-----------------------------");
-		System.out.println(cartItemRepository.findByShoppingCartAndProductId(existingCart, requestDTO.getProductId()));
 		
 		int deletedCount = cartItemRepository.deleteByShoppingCartAndProductId(existingCart, requestDTO.getProductId());
 		
@@ -132,6 +135,35 @@ public class CartServiceImpl implements CartService {
 	        String message = String.format("장바구니에서 상품 ID %d를 찾을 수 없습니다.", requestDTO.getProductId());
 	        throw new RuntimeException(message);
 	    }
+	}
+
+	@Override
+	public void removeItemsFromCart(Long userId, String sessionId, RemoveSelectedCartItemsRequestDTO requestDTO)
+			throws Exception {
+		Optional<ShoppingCart> existingOptCart;
+		
+		if (userId != null) {
+			// 회원인 경우 userId를 기준으로 조회
+			existingOptCart = cartRepository.findByUserIdAndStatus(userId, ShoppingCartStatus.ACTIVE);
+			
+		} else {
+			// 비회원인 경우 sessionId를 기준으로 조회
+			existingOptCart = cartRepository.findBySessionIdAndStatus(sessionId, ShoppingCartStatus.ACTIVE);			
+		}
+		
+		// 장바구니가 존재하는지 확인
+	    ShoppingCart existingCart = existingOptCart.orElseThrow(() -> new RuntimeException("장바구니를 찾을 수 없습니다."));
+		
+		List<Long> productIds = requestDTO.getProductIds();
+		
+		// 삭제할 상품이 존재하는지 확인
+	    if (productIds == null || productIds.isEmpty()) {
+	        throw new IllegalArgumentException("삭제할 상품 ID가 제공되지 않았습니다.");
+	    }
+		
+	    // 장바구니에서 해당 상품들을 삭제합니다.
+	    LocalDateTime now = LocalDateTime.now(); // 현재 시점으로 삭제 시점 설정
+	    int deletedCount = cartItemRepository.softDeleteByShoppingCartIdAndProductIds(existingCart.getId(), productIds, now);
 	}
 
 }

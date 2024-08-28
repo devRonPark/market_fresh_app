@@ -15,6 +15,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.market.domain.AddToCartRequestDTO;
 import com.market.domain.RemoveCartItemRequestDTO;
+import com.market.domain.RemoveSelectedCartItemsRequestDTO;
 import com.market.entity.CartItem;
 import com.market.entity.Product;
 import com.market.entity.ShoppingCart;
@@ -87,8 +88,6 @@ public class CartController {
 	// 장바구니에서 상품 삭제
 	@PostMapping("/remove")
 	public String removeCartItem(RemoveCartItemRequestDTO requestDTO, HttpSession session, Model model, RedirectAttributes redirectAttributes) throws Exception {
-		System.out.println(requestDTO);
-		
 		// 사용자 ID 가져오기
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         Long userId = (authentication != null && authentication.getPrincipal() instanceof User)
@@ -108,7 +107,30 @@ public class CartController {
         	e.printStackTrace();
         }
 		
-		System.out.println("removeCartItem 호출");
+		return "redirect:/cart";
+	}
+	
+	@PostMapping("/remove-selected")
+	public String removeSelectedCartItems(RemoveSelectedCartItemsRequestDTO requestDTO, HttpSession session, Model model, RedirectAttributes redirectAttributes) throws Exception {
+		// 사용자 ID 가져오기
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        Long userId = (authentication != null && authentication.getPrincipal() instanceof User)
+                ? ((com.market.entity.User) authentication.getPrincipal()).getId()
+                : null;
+
+        // HttpSession에서 세션 ID 가져오기
+        String sessionId = session.getId();
+        
+        try {
+        	cartService.removeItemsFromCart(userId, sessionId, requestDTO);
+        	
+        	// 성공 메시지 설정 (옵션)
+            redirectAttributes.addFlashAttribute("successMessage", "장바구니에서 상품이 성공적으로 삭제되었습니다.");
+        } catch (Exception e) {
+        	redirectAttributes.addFlashAttribute("errorMessage", "장바구니에서 상품 삭제 중 오류가 발생했습니다.");
+        	e.printStackTrace();
+        }
+		
 		return "redirect:/cart";
 	}
 }
