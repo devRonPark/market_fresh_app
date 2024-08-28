@@ -27,16 +27,16 @@
 		    <div class="mr-5">
 				<div class="flex justify-between items-center p-4 mb-4 bg-white shadow-md rounded-lg">
 					<div class="flex">
-					    <input type="checkbox" />
+					    <input type="checkbox" id="selectAllBtn" checked />
 						<p class="text-sm ml-4">
 							전체 선택 
-							<span>0</span>
+							<span id="selectedItemCountBox" th:text="${cartItemList.size()}">0</span>
 							/
-							<span>1</span>
+							<span th:text="${cartItemList.size()}"></span>
 						</p>
 					</div>
 					<div>
-						<button class="px-3 py-1 border border-black border-solid border-1 rounded-md text-sm text-black-500">
+						<button class="px-3 py-1 border border-black border-solid border-1 rounded-md text-sm text-black-500 hover:bg-[#f2f5f8]">
 						   선택 삭제
 						</button>
 					</div>
@@ -53,7 +53,7 @@
                     <!-- 상품 정보 -->
                     <div class="flex justify-between items-center">
                         <div class="flex gap-x-2">
-	                        <input type="checkbox" />
+	                        <input type="checkbox" class="item-checkbox" checked />
 	                        <p>[ [[${cartItem.product.brand}]] ] [[${cartItem.product.name}]]</p>                        
                         </div>
                         <form th:action="@{/cart/remove}" th:method="delete">
@@ -77,7 +77,7 @@
                         
                         <div>
                             <div>
-                                <p>[[${cartItem.product.price}]]원</p>
+                                <p>[[${cartItem.product.price * cartItem.quantity}]]원</p>
                             </div>
                             <div class="flex justify-between items-center gap-x-3 h-10 px-3 py-2 rounded-lg bg-gray-100 shadow-md">
 							  <button class="rounded-full bg-white hover:bg-gray-200 p-2 transition duration-200 ease-in-out">
@@ -94,12 +94,12 @@
 							</div>
                         </div>
                     </div>
-                    <div class="flex flex-col gap-y-3 p-3 mt-4 bg-gray-100 rounded-lg">
-                        <p class="text-sm text-gray-500">상품 [[${cartItem.product.price}]]원 + 배송비 3000원</p>
-                        <p class="text-lg font-bold">[[${cartItem.product.price + 3000}]]원</p>
-                        
-                    </div>
                 </div>		    
+                <div th:if="${!isCartEmpty}" class="flex flex-col gap-y-3 p-3 mt-4 bg-gray-100 rounded-lg">
+                    <p class="text-sm text-gray-500">상품 [[${totalPrice}]]원 + 배송비 3000원</p>
+                    <p class="text-lg font-bold">[[${totalPrice + 3000}]]원</p>
+                    
+                </div>
 		    </div>
 			
 			<div class="flex flex-col gap-y-3 flex-grow">
@@ -108,7 +108,7 @@
 				     
 				     <div class="flex justify-between">
 				         <p>상품금액</p>
-				         <p>10800원</p>
+				         <p>[[${totalPrice}]]원</p>
 				     </div>
 				     <div class="flex justify-between">
 				         <p>배송비</p>
@@ -116,7 +116,7 @@
 				     </div>
 				     <div class="flex justify-between pt-3 border-t border-solid border-1 border-eceff3">
 				         <p>결제예정금액</p>
-				         <p class="text-xl font-bold">13800원</p>
+				         <p class="text-xl font-bold">[[${totalPrice + 3000}]] 원</p>
 				     </div>
 				</div>
                 <a sec:authorize="!isAuthenticated()" href="/auth/login" class="flex justify-center items-center w-full h-14 mx-auto bg-[#5F0080] rounded-md text-white text-center">로그인</a>	
@@ -125,7 +125,7 @@
                     th:classappend="${isCartEmpty ? 'bg-[#e8dbf3] cursor-not-allowed' : 'bg-[#c19edf]'}"
                     th:disabled="${isCartEmpty}"
                     class="flex justify-center items-center w-full h-14 mx-auto bg-[#5F0080] rounded-md text-white text-center"
-                    th:text="${isCartEmpty ? '상품을 담아주세요' : totalPrice + ' 원 주문하기'}"
+                    th:text="${isCartEmpty ? '상품을 담아주세요' : totalPrice + 3000 + ' 원 주문하기'}"
                 >
                 </button>		
 			</div>

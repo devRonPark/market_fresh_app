@@ -45,7 +45,7 @@ public class CartController {
 		System.out.println(sessionId);
 		List<CartItem> cartItemList = cartService.getCartItemList(userId, sessionId);
 		int cartSize = cartItemList.size();
-        int totalPrice = cartSize > 0 ? cartItemList.stream().mapToInt(cartItem -> cartItem.getProduct().getPrice()).sum() : 0;
+        int totalPrice = cartSize > 0 ? cartItemList.stream().mapToInt(cartItem -> cartItem.getProduct().getPrice() * cartItem.getQuantity()).sum() : 0;
 		
 		model.addAttribute("cartItemList", cartItemList);
 		model.addAttribute("totalPrice", totalPrice);
@@ -55,7 +55,7 @@ public class CartController {
 	
 	// 장바구니에 상품 추가
 	@PostMapping("/add")
-	public String addToCart(AddToCartRequestDTO requestDTO, Model model, HttpSession session) throws Exception {
+	public String addToCart(AddToCartRequestDTO requestDTO, Model model, HttpSession session, RedirectAttributes redirectAttributes) throws Exception {
 		// 사용자 ID 가져오기
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         Long userId = (authentication != null && authentication.getPrincipal() instanceof User)
@@ -76,9 +76,9 @@ public class CartController {
 			CartItem cartItem = requestDTO.toCartItem(shoppingCart, product);
 			cartService.addCartItem(cartItem);
 			
-			model.addAttribute("successMessage", "장바구니에 상품이 추가되었습니다.");			
+			redirectAttributes.addFlashAttribute("successMessage", "장바구니에 상품이 추가되었습니다.");			
 		} catch (Exception e) {
-			model.addAttribute("errorMessage", "상품 추가 중 오류가 발생했습니다.");			
+			redirectAttributes.addFlashAttribute("errorMessage", "상품 추가 중 오류가 발생했습니다.");			
 		}
 		
 		return "redirect:/";
