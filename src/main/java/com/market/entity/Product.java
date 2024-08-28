@@ -1,6 +1,7 @@
 package com.market.entity;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
@@ -53,7 +54,7 @@ public class Product {
 
     @CreatedDate
     @Column(name = "added_date")
-    private LocalDate addedDate;
+    private LocalDateTime addedDate = LocalDateTime.now();
 	
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
