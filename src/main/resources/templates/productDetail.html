@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html 
+    xmlns:th="http://www.thymeleaf.org"
+    xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+    layout:decorate="~{layouts/default}"
+>
+    <body>
+        <div layout:fragment="content">
+            <div class="max-w-[1050px] mx-auto py-8 text-center">
+                <div class="flex flex-col md:flex-row bg-white shadow-lg rounded-lg overflow-hidden p-4 sm:p-6 lg:p-8">
+                    <!-- 상품 이미지 -->
+                    <div class="md:w-1/2 relative overflow-hidden">
+                        <img class="w-full h-auto object-cover transition-transform duration-300 ease-in-out hover:scale-105"
+                             th:src="${product.imageURL}" 
+                             alt="Product image of [[${product.name}]]"
+                             width="430"
+                        >
+                        <!-- 이미지 확대 효과 적용 -->
+                    </div>
+                    
+                    <!-- 상품 세부 정보 -->
+                    <form action="/cart/add" method="POST" class="md:w-1/2 p-6 flex flex-col justify-around space-y-4 min-h-[calc(100vh-4rem)]" th:if="${product ne null}">
+                        <div class="text-left">
+                            <!-- 상품명 -->
+                            <h1 class="text-2xl font-bold mb-2" th:text="${product.name}">상품명</h1>
+                            
+                            <!-- 상품 설명 -->
+                            <p class="text-gray-700 mb-4" th:text="${product.description}">상품에 대한 설명</p>
+                            
+                            <!-- 상품 브랜드 -->
+                            <p class="text-lg font-semibold mb-2" th:text="${product.brand}">브랜드: 상품 브랜드</p>
+                            
+                            <!-- 상품 가격 -->
+                            <p class="text-xl font-bold mb-4">가격: [[${product.price}]]원</p>
+                            
+                            <!-- 원산지 정보 -->
+                            <p class="text-gray-600 mb-4">원산지: 상품설명/상세정보 참조</p>
+                            
+                            <!-- 수량 조절 -->
+                            <div class="flex justif-start items-center gap-x-4 mb-4">
+                                <span class="text-gray-700">수량</span>
+                                <div class="flex items-center gap-x-2">
+                                    <button type="button"
+                                        class="decreaseQty rounded-full bg-gray-200 hover:bg-gray-300 p-2">
+                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" width="16"
+                                            height="16" viewBox="0 0 20 20" stroke-width="1.5"
+                                            stroke="currentColor">
+		                                    <path stroke-linecap="round" stroke-linejoin="round" d="M5 10h10" />
+                                        </svg>
+                                    </button>
+                                    <input type="number" name="quantity" id="quantity" value="1"
+                                        min="1"
+                                        class="w-12 text-center text-gray-700 font-medium border border-gray-300 rounded-lg">
+                                    <button type="button"
+                                        class="increaseQty rounded-full bg-gray-200 hover:bg-gray-300 p-2">
+                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" width="16"
+                                            height="16" viewBox="0 0 20 20" stroke-width="1.5"
+                                            stroke="currentColor">
+                                            <path stroke-linecap="round" stroke-linejoin="round"
+                                                d="M10 5v10m5-5H5" />
+                                        </svg>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- 상품 ID (hidden input) -->
+                        <input type="hidden" name="productId" th:value="${product.id}" />
+                        <!-- 장바구니 담기 버튼 -->
+                        <button type="submit" class="w-full py-3 bg-[#5F0080] text-white rounded-md text-lg font-semibold hover:bg-[#4a0068] transition duration-200 ease-in-out" aria-label="장바구니에 담기">
+                            장바구니에 담기
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
