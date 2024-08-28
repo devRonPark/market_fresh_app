@@ -82,13 +82,14 @@ public class CartServiceImpl implements CartService {
 			optCart = cartRepository.findBySessionIdAndStatus(sessionId, ShoppingCartStatus.ACTIVE);
 		}
 		
-		if (!optCart.isPresent()) {
-			throw new RuntimeException();
-		}
-		else {
+		if (optCart.isPresent()) {
 			ShoppingCart cart = optCart.get();			
 			List<CartItem> cartItemList = cartItemRepository.findAllByShoppingCart(cart);		
 			return cartItemList;			
+		}
+		else {
+			// 장바구니가 없는 경우 빈 리스트를 반환
+            return List.of();
 		}
 		
 	}

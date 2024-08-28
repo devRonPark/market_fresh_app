@@ -23,7 +23,7 @@
             </div>
         </div>
 
-		<div class="w-full bg-white shadow-md rounded-lg p-6 grid grid-cols-[3fr,2fr]">
+		<div class="w-full bg-white shadow-md rounded-lg p-6 grid grid-cols-[3fr,2fr] min-h-screen">
 		    <div class="mr-5">
 				<div class="flex justify-between items-center p-4 mb-4 bg-white shadow-md rounded-lg">
 					<div class="flex">
@@ -40,6 +40,13 @@
 						   선택 삭제
 						</button>
 					</div>
+				</div>
+				<div th:if="${isCartEmpty}" class="mt-[120px]">
+				    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6 mx-auto mb-4">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m9-.75a9 9 0 1 1-18 0 9 9 0 0 1 18 0Zm-9 3.75h.008v.008H12v-.008Z" />
+                    </svg>
+
+				    <p>장바구니에 담긴 상품이 없습니다.</p>
 				</div>
 				<!-- 장바구니에 담기는 상품 정보 -->
                 <div class="px-4 py-5 shadow-md rounded-lg" th:each="cartItem: ${cartItemList}">
@@ -112,7 +119,15 @@
 				         <p class="text-xl font-bold">13800원</p>
 				     </div>
 				</div>
-                <a sec:authorize="!isAuthenticated()" href="/auth/login" class="flex justify-center items-center w-full h-14 mx-auto bg-[#5F0080] rounded-md text-white text-center">로그인</a>			
+                <a sec:authorize="!isAuthenticated()" href="/auth/login" class="flex justify-center items-center w-full h-14 mx-auto bg-[#5F0080] rounded-md text-white text-center">로그인</a>	
+                <button 
+                    sec:authorize="isAuthenticated()" 
+                    th:classappend="${isCartEmpty ? 'bg-[#e8dbf3] cursor-not-allowed' : 'bg-[#c19edf]'}"
+                    th:disabled="${isCartEmpty}"
+                    class="flex justify-center items-center w-full h-14 mx-auto bg-[#5F0080] rounded-md text-white text-center"
+                    th:text="${isCartEmpty ? '상품을 담아주세요' : totalPrice + ' 원 주문하기'}"
+                >
+                </button>		
 			</div>
 		</div>
 	</div>

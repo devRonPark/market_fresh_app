@@ -44,8 +44,12 @@ public class CartController {
 		String sessionId = session.getId();
 		System.out.println(sessionId);
 		List<CartItem> cartItemList = cartService.getCartItemList(userId, sessionId);
+		int cartSize = cartItemList.size();
+        int totalPrice = cartSize > 0 ? cartItemList.stream().mapToInt(cartItem -> cartItem.getProduct().getPrice()).sum() : 0;
 		
 		model.addAttribute("cartItemList", cartItemList);
+		model.addAttribute("totalPrice", totalPrice);
+		model.addAttribute("isCartEmpty", cartItemList.isEmpty());
 		return "cartList";
 	}
 	
