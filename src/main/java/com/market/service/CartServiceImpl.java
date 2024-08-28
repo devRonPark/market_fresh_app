@@ -7,6 +7,7 @@ import java.util.stream.Collectors;
 
 import org.springframework.stereotype.Service;
 
+import com.market.domain.RemoveCartItemRequestDTO;
 import com.market.domain.ShoppingCartStatus;
 import com.market.entity.CartItem;
 import com.market.entity.ShoppingCart;
@@ -90,6 +91,46 @@ public class CartServiceImpl implements CartService {
 			return cartItemList;			
 		}
 		
+	}
+
+	@Override
+	@Transactional
+	public void removeItemFromCart(Long userId, String sessionId, RemoveCartItemRequestDTO requestDTO)
+			throws Exception {
+		Optional<ShoppingCart> existingOptCart;
+		
+		if (userId != null) {
+			// 회원인 경우 userId를 기준으로 조회
+			existingOptCart = cartRepository.findByUserIdAndStatus(userId, ShoppingCartStatus.ACTIVE);
+			
+		} else {
+			// 비회원인 경우 sessionId를 기준으로 조회
+			existingOptCart = cartRepository.findBySessionIdAndStatus(sessionId, ShoppingCartStatus.ACTIVE);			
+		}
+		
+		
+		if (!existingOptCart.isPresent()) {
+			String message = userId != null 
+	                ? String.format("사용자 ID %d에 대한 활성 장바구니를 찾을 수 없습니다.", userId)
+	                : String.format("세션 ID %s에 대한 활성 장바구니를 찾을 수 없습니다.", sessionId);
+	        throw new RuntimeException(message);
+		}
+		
+		// 데이터베이스에서 해당 상품을 찾아 삭제
+		// 조건에 따른 삭제 로직
+		ShoppingCart existingCart = existingOptCart.get();
+		System.out.println("-----------------------------");
+		System.out.println(existingCart);
+		System.out.println("-----------------------------");
+		System.out.println(cartItemRepository.findByShoppingCartAndProductId(existingCart, requestDTO.getProductId()));
+		
+		int deletedCount = cartItemRepository.deleteByShoppingCartAndProductId(existingCart, requestDTO.getProductId());
+		
+		if (deletedCount == 0) {
+	        // 상품이 장바구니에 존재하지 않을 경우
+	        String message = String.format("장바구니에서 상품 ID %d를 찾을 수 없습니다.", requestDTO.getProductId());
+	        throw new RuntimeException(message);
+	    }
 	}
 
 }
