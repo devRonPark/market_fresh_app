@@ -56,9 +56,6 @@ public class ShoppingCart {
     @Column(name = "last_updated_at")
     private LocalDateTime lastUpdatedAt;
     
-    @OneToMany(mappedBy = "shoppingCart", cascade = CascadeType.ALL, orphanRemoval = true)
-    private Set<CartItem> cartItems;
-    
     @PrePersist
     protected void onCreate() {
         this.createdAt = LocalDateTime.now();
@@ -68,5 +65,7 @@ public class ShoppingCart {
     protected void onUpdate() {
         this.lastUpdatedAt = LocalDateTime.now();
     }
+    
+    
 
 }

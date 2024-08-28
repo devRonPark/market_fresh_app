@@ -15,6 +15,7 @@ import jakarta.persistence.ManyToOne;
 import jakarta.persistence.PostLoad;
 import jakarta.persistence.PrePersist;
 import jakarta.persistence.Transient;
+import lombok.Builder;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
 
@@ -59,4 +60,18 @@ public class CartItem {
     protected void onCreate() {
         this.addedAt = LocalDateTime.now();
     }
+
+    @Builder
+	public CartItem(ShoppingCart shoppingCart, Product product, int quantity, int unitPrice, LocalDateTime addedAt,
+			int totalPrice) {
+		super();
+		this.shoppingCart = shoppingCart;
+		this.product = product;
+		this.quantity = quantity;
+		this.unitPrice = unitPrice;
+		this.addedAt = addedAt;
+		this.totalPrice = totalPrice;
+	}
+    
+    
 }

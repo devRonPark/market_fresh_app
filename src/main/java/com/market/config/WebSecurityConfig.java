@@ -50,7 +50,8 @@ public class WebSecurityConfig {
 					new AntPathRequestMatcher("/auth/logout"),
 					new AntPathRequestMatcher("/err"),
 					new AntPathRequestMatcher("/auth/join"),
-					new AntPathRequestMatcher("/product/**")
+					new AntPathRequestMatcher("/product/**"),
+					new AntPathRequestMatcher("/cart/**")
 				).permitAll()
 				.requestMatchers(
 						PathRequest.toStaticResources().atCommonLocations()

@@ -6,6 +6,21 @@
 >
     <div layout:fragment="content">
         <div class="max-w-[640px] mx-auto text-center">
+            <!-- 메시지 표시 부분 -->
+		    <div class="container mx-auto p-4">
+		        <!-- 성공 메시지 -->
+		        <div th:if="${successMessage} ne null" class="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded relative" role="alert">
+		            <strong class="font-bold">성공!</strong>
+		            <span class="block sm:inline" th:text="${successMessage}"></span>
+		        </div>
+		
+		        <!-- 오류 메시지 -->
+		        <div th:if="${errorMessage} ne null" class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative" role="alert">
+		            <strong class="font-bold">오류!</strong>
+		            <span class="block sm:inline" th:text="${errorMessage}"></span>
+		        </div>
+		    </div>
+        
             <div class="flex items-center justify-between mt-[50px] mb-[12px]">
                 <div>총 300건</div>
                 
@@ -17,28 +32,81 @@
             </div>
             
             <div class="grid gap-4 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
-	            <div class="max-w-xs rounded overflow-hidden shadow-lg bg-white border mx-auto" th:each="product: ${products}">
+	            <div class="max-w-xs rounded overflow-hidden shadow-lg bg-white border mx-auto" th:each="product, num: ${products}">
 	               <div class="relative">
                         <img class="w-full" th:src="${product.imageURL}" alt="Product Image">
                     </div>
 	            
-				    <!-- Add to Cart Button -->
+				    <!-- 장바구니 담기 버튼 (모달 열기 트리거) -->
 				    <div class="px-6 py-4">
-				        <button class="w-full bg-white border border-gray-300 text-gray-700 font-bold py-2 px-4 rounded shadow-sm hover:bg-gray-50 flex items-center justify-center">
-				            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+				        <button th:id="${'openCartModal-' + num.count}" class="w-full bg-white border border-gray-300 text-gray-700 font-bold py-2 px-4 rounded shadow-sm hover:bg-gray-50 flex items-center justify-center">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
                                 <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 3h1.386c.51 0 .955.343 1.087.835l.383 1.437M7.5 14.25a3 3 0 0 0-3 3h15.75m-12.75-3h11.218c1.121-2.3 2.1-4.684 2.924-7.138a60.114 60.114 0 0 0-16.536-1.84M7.5 14.25 5.106 5.272M6 20.25a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0Zm12.75 0a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0Z" />
                             </svg>
-				            
-				            <span class="ml-1">담기</span>
-				        </button>
-				    </div>            
-                    <!-- Product Information -->
+                          
+                            <span class="ml-1">담기</span>
+                        </button>
+				    </div>
+				    
+				    <!-- 모달 오버레이 (기본적으로 숨김 처리) -->
+					<div th:id="${'cartModal-' + num.count}" class="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50 hidden">
+					  <!-- 모달 박스 -->
+					  <div class="bg-white rounded-lg shadow-lg w-96 p-6">
+					    <!-- form 시작 -->
+					    <form action="/cart/add" method="POST">
+					      <!-- 상품 정보 -->
+					      <div class="flex items-center justify-between mb-4">
+					        <div class="flex items-center">
+					          <img th:src="${product.imageURL}" alt="상품 이미지" class="w-16 h-16 rounded-md mr-4">
+					          <div>
+					            <h2 class="text-lg font-semibold text-gray-800">[ [[${product.brand}]] ] [[${product.name}]]</h2>
+					            <p class="text-sm text-gray-600">[[${product.price}]] 원</p>
+					          </div>
+					        </div>
+					      </div>
+					
+					      <!-- 수량 조절 -->
+					      <div class="flex justify-between items-center mb-4">
+					        <span class="text-gray-700">수량</span>
+					        <div class="flex items-center gap-x-2">
+					          <button type="button" class="decreaseQty rounded-full bg-gray-200 hover:bg-gray-300 p-2">
+					            <svg xmlns="http://www.w3.org/2000/svg" fill="none" width="16" height="16" viewBox="0 0 20 20" stroke-width="1.5" stroke="currentColor">
+					              <path stroke-linecap="round" stroke-linejoin="round" d="M5 10h10" />
+					            </svg>
+					          </button>
+					          <input type="number" name="quantity" id="quantity" value="1" min="1" class="w-12 text-center text-gray-700 font-medium border border-gray-300 rounded-lg">
+					          <button type="button" class="increaseQty rounded-full bg-gray-200 hover:bg-gray-300 p-2">
+					            <svg xmlns="http://www.w3.org/2000/svg" fill="none" width="16" height="16" viewBox="0 0 20 20" stroke-width="1.5" stroke="currentColor">
+					              <path stroke-linecap="round" stroke-linejoin="round" d="M10 5v10m5-5H5" />
+					            </svg>
+					          </button>
+					        </div>
+					      </div>
+					
+					      <!-- 버튼들 -->
+					      <div class="flex justify-between">
+					        <button type="button" class="cancelBtn px-4 py-2 bg-gray-300 hover:bg-gray-400 text-gray-800 rounded-lg">
+					          취소
+					        </button>
+					        <button type="submit" class="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg">
+					          장바구니 담기
+					        </button>
+					      </div>
+					
+					      <!-- 상품 ID (hidden input) -->
+                          <input type="hidden" name="productId" th:value="${product.id}" />
+					    </form>
+					    <!-- form 끝 -->
+					  </div>
+					</div>
+
+                    <!-- 상품 정보 -->
 				    <div class="px-6 py-4">
 				        <h3 class="font-bold text-lg">[ [[${product.brand}]] ] [[${product.name}]]</h3>
 				        <p class="text-gray-500 text-sm mt-2" th:text="${product.description}"></p>
 				    </div>
 				    
-				    <!-- Price Section -->
+				    <!-- 가격 정보 -->
 				    <div class="px-6 py-4">
 				        <p class="text-gray-500 text-sm">[[${product.price}]]원</p>
 				        <p class="text-gray-500 text-sm mt-1">재고수량: [[${product.stockQuantity}]]</p>
