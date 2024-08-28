@@ -1,5 +1,6 @@
 package com.market.config;
 
+import org.springframework.boot.autoconfigure.security.servlet.PathRequest;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -21,14 +22,7 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class WebSecurityConfig {
 	private final UserDetailsService userDetailsService;
-	
-	// 특정 부분에 스프링 시큐리티 기능 비활성화
-	@Bean
-	WebSecurityCustomizer configure() {
-		return web ->
-			web.ignoring().requestMatchers(new AntPathRequestMatcher("/static/**/"));
-	}
-	
+		
 	// 인증 관리자 설정
 	@Bean
 	AuthenticationManager authenticationManager(HttpSecurity http, BCryptPasswordEncoder bCEncoder, UserDetailsService uds) {
@@ -57,6 +51,9 @@ public class WebSecurityConfig {
 					new AntPathRequestMatcher("/err"),
 					new AntPathRequestMatcher("/auth/join"),
 					new AntPathRequestMatcher("/product/**")
+				).permitAll()
+				.requestMatchers(
+						PathRequest.toStaticResources().atCommonLocations()
 				).permitAll()
 				.requestMatchers(
 					new AntPathRequestMatcher("/admin/**")

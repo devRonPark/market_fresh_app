@@ -31,7 +31,7 @@ public class AuthServiceImpl implements AuthService {
 	@Override
 	public void login(LoginFormDTO loginForm) throws Exception {
 		// 이메일로 사용자 존재 여부 조회
-		User exUser = userRepository.findByEmail(loginForm.getEmail()).orElseThrow(() -> new IllegalArgumentException("이메일 또는 비밀번호가 잘못되었습니다."));
+		User exUser = userRepository.findByEmail(loginForm.getUsername()).orElseThrow(() -> new IllegalArgumentException("이메일 또는 비밀번호가 잘못되었습니다."));
 		
 		// 비밀번호 일치 여부 확인
 		boolean isPasswordMatched = bCryptPasswordEncoder.matches(loginForm.getPassword(), exUser.getPassword());

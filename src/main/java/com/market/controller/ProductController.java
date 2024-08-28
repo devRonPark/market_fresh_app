@@ -14,15 +14,9 @@ import com.market.service.ProductService;
 import lombok.RequiredArgsConstructor;
 
 @Controller
+@RequestMapping("/product")
 @RequiredArgsConstructor
-public class MainController {
+public class ProductController {
 	private final ProductService productService;
 
-    @GetMapping("/")
-    public String home(@RequestParam("sorted_type") int sortedType,Model model) throws Exception {
-    	List<Product> products = productService.getProductListBy(sortedType);
-    	model.addAttribute("products", products);
-        // 메인 페이지를 반환하는 로직
-        return "main";
-    }
 }
