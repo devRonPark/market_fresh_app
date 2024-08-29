@@ -24,12 +24,36 @@
 		</div>
 
 		<div class="flex items-center justify-between mt-[50px] mb-[12px]">
-			<div>총 300건</div>
+			<div>총 [[${products.size()}]] 건</div>
 
 			<ul class="flex items-center">
-				<li><a href="/?sorted_type=0" class="block p-2">신상품순</a></li>
-				<li><a href="/?sorted_type=1" class="block p-2">낮은 가격순</a></li>
-				<li><a href="/?sorted_type=2" class="block p-2">높은 가격순</a></li>
+				<li>
+				    <a 
+				        href="/?sorted_type=0" 
+				        class="block p-2"
+				        th:classappend="${sortedType} == 0 ? 'text-blue-500' : 'hover:text-blue-500'" 
+				    >
+				        신상품순
+			        </a>
+			    </li>
+				<li>
+				    <a 
+				        href="/?sorted_type=1" 
+				        class="block p-2"
+				        th:classappend="${sortedType} == 1 ? 'text-blue-500' : 'hover:text-blue-500'" 
+			        >
+			            낮은 가격순
+		            </a>
+	            </li>
+				<li>
+				    <a 
+				        href="/?sorted_type=2" 
+				        class="block p-2"
+				        th:classappend="${sortedType} == 2 ? 'text-blue-500' : 'hover:text-blue-500'" 
+			        >
+			            높은 가격순
+		            </a>
+	            </li>
 			</ul>
 		</div>
 

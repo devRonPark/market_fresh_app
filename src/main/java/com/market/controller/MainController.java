@@ -26,6 +26,7 @@ public class MainController {
     	System.out.println("여기 호출");
     	List<Product> products = productService.getProductListBy(sortedType);
     	model.addAttribute("products", products);
+    	model.addAttribute("sortedType", sortedType == null ? 0 : sortedType);
         // 메인 페이지를 반환하는 로직
         return "main";
     }

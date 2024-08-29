@@ -50,7 +50,8 @@
             const cancelButtons = document.querySelectorAll('.cancelBtn');
 
             openCartModalButtons.forEach(button => {
-                button.addEventListener('click', function () {
+                button.addEventListener('click', function (event) {
+                    event.preventDefault();
                     const modalId = this.id.replace('openCartModal', 'cartModal');
                     const modal = document.getElementById(modalId);
                     modal.classList.remove('hidden');
@@ -59,6 +60,7 @@
 
             cancelButtons.forEach(button => {
                 button.addEventListener('click', function () {
+                    event.preventDefault();
                     const modal = this.closest('.fixed');
                     modal.classList.add('hidden');
                 });

@@ -37,7 +37,7 @@
 					</div>
 					<div>
 						<form id="removeSelectedItemsForm" th:action="@{/cart/remove-selected}" method="post">
-						    <input type="hidden" name="cartId" th:value="${cartItemList[0].shoppingCart.id}" />
+						    <input type="hidden" name="cartId" th:if="${!isCartEmpty}" th:value="${cartItemList[0].shoppingCart.id}" />
 						    <input type="hidden" name="productIds" id="selectedProductIds" />
                             <button 
                                 type="submit" 

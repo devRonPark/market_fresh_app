@@ -83,7 +83,7 @@ public class CartServiceImpl implements CartService {
 		
 		// 회원
 		if (userId != null) {
-			optCart = cartRepository.findByUserIdAndStatus(userId, ShoppingCartStatus.ACTIVE);
+			optCart = cartRepository.findByUserIdAndStatusOrSessionIdAndStatus(userId, ShoppingCartStatus.ACTIVE, sessionId, ShoppingCartStatus.ACTIVE);
 		} else { // 비회원
 			optCart = cartRepository.findBySessionIdAndStatus(sessionId, ShoppingCartStatus.ACTIVE);
 		}

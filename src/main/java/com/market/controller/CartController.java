@@ -37,13 +37,11 @@ public class CartController {
 	public String cartListPage(Model model, HttpSession session) throws Exception {
 		// 사용자 ID 가져오기
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-		Long userId = (authentication != null && authentication.getPrincipal() instanceof User)
+		Long userId = (authentication != null && authentication.getPrincipal() instanceof com.market.entity.User)
 				? ((com.market.entity.User) authentication.getPrincipal()).getId()
 						: null;
-		
 		// HttpSession 에서 세션 ID 가져오기
 		String sessionId = session.getId();
-		System.out.println(sessionId);
 		List<CartItem> cartItemList = cartService.getCartItemList(userId, sessionId);
 		int cartSize = cartItemList.size();
         int totalPrice = cartSize > 0 ? cartItemList.stream().mapToInt(cartItem -> cartItem.getProduct().getPrice() * cartItem.getQuantity()).sum() : 0;
@@ -65,6 +63,11 @@ public class CartController {
 
         // HttpSession에서 세션 ID 가져오기
         String sessionId = session.getId();
+        
+        // 로그인 후에는 세션 ID 변경되므로 로그인 전 세션 ID 기억
+        if (userId == null) {
+        	session.setAttribute("PRE_LOGIN_SESSION_ID", sessionId);        	
+        }
         
 		try {
 			// 상품 조회

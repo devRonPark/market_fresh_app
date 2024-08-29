@@ -22,6 +22,7 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class WebSecurityConfig {
 	private final UserDetailsService userDetailsService;
+	private final CustomLoginSuccessHandler loginSuccessHandler;
 		
 	// 인증 관리자 설정
 	@Bean
@@ -63,9 +64,10 @@ public class WebSecurityConfig {
 			);
 		
 		http.formLogin(form -> form
-				.loginPage("/")
+				.loginPage("/auth/login")
 				.loginProcessingUrl("/auth/login")
-				.defaultSuccessUrl("/", true));
+				.successHandler(loginSuccessHandler)
+				);
 		
 		http.logout(logout -> logout
 				.logoutUrl("/auth/logout")
